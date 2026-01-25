@@ -23,14 +23,7 @@ public class TwoSum
      */
     public int[] Solve(int[] nums, int target)
     {
-        if (nums.Length < 2 && nums.Length > Math.Pow(10, 4))
-            throw new ArgumentException("Invalid array length.");
-
-        if(nums.Any(x => x < -Math.Pow(10, 9) || x > Math.Pow(10, 9)))
-            throw new ArgumentException("Array elements are out of range.");
-
-        if(target < -Math.Pow(10, 9) || target > Math.Pow(10, 9))
-            throw new ArgumentException("Target is out of range.");
+        CheckConstraints(nums, target);
 
         Dictionary<int, int> readNumbers = new();
 
@@ -44,5 +37,17 @@ public class TwoSum
         }
 
         return new ArgumentException("No valid answer exists.").Data.Values.OfType<int>().ToArray();
+    }
+
+    private static void CheckConstraints(int[] nums, int target)
+    {
+        if (nums.Length < 2 && nums.Length > Math.Pow(10, 4))
+            throw new ArgumentException("Invalid array length.");
+
+        if (nums.Any(x => x < -Math.Pow(10, 9) || x > Math.Pow(10, 9)))
+            throw new ArgumentException("Array elements are out of range.");
+
+        if (target < -Math.Pow(10, 9) || target > Math.Pow(10, 9))
+            throw new ArgumentException("Target is out of range.");
     }
 }
