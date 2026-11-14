@@ -26,7 +26,6 @@ public class TwoSum
         CheckConstraints(nums, target);
 
         Dictionary<int, int> readNumbers = new();
-
         for (int i = 0; i < nums.Length; i++)
         {
             var complement = target - nums[i];
@@ -36,12 +35,12 @@ public class TwoSum
             readNumbers[nums[i]] = i;
         }
 
-        return new ArgumentException("No valid answer exists.").Data.Values.OfType<int>().ToArray();
+        throw new ArgumentException("No valid answer exists.");
     }
 
     private static void CheckConstraints(int[] nums, int target)
     {
-        if (nums.Length < 2 && nums.Length > Math.Pow(10, 4))
+        if (nums.Length < 2 || nums.Length > Math.Pow(10, 4))
             throw new ArgumentException("Invalid array length.");
 
         if (nums.Any(x => x < -Math.Pow(10, 9) || x > Math.Pow(10, 9)))
